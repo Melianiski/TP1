@@ -9,6 +9,13 @@ body {
     font-family: monospace;
 }
 
+/* Tipografía exclusiva para títulos y subtítulos */
+h1, h2, h3, h4, h5, h6, .press-start-2p-regular {
+  font-family: "Press Start 2P", system-ui;
+  font-weight: 400;
+  font-style: normal;
+}
+
 header {
     background-color: #1c1c1c;
     border-bottom: 2px solid #eeeeee;
