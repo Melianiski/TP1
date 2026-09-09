@@ -1,32 +1,56 @@
+/* ========================================
+   CONFIGURACIÓN GENERAL
+   ======================================== */
+
 * {
     box-sizing: border-box;
 }
 
 body {
     margin: 0;
-    background-color: #111111;
+    background-color: #000000;
     color: #eeeeee;
     font-family: monospace;
 }
 
-/* Tipografía exclusiva para títulos y subtítulos */
-h1, h2, h3, h4, h5, h6, .press-start-2p-regular {
-  font-family: "Press Start 2P", system-ui;
-  font-weight: 400;
-  font-style: normal;
+
+/* ========================================
+   TIPOGRAFÍA
+   ======================================== */
+
+/* Tipografía para títulos y subtítulos */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: "Press Start 2P", system-ui;
+    font-weight: 400;
+    font-style: normal;
 }
 
+
+/* ========================================
+   ENCABEZADO
+   ======================================== */
+
 header {
-    background-color: #1c1c1c;
+    background-color: #000000;
     border-bottom: 2px solid #eeeeee;
-    padding: 20px;
+    padding: 1.25rem;
     text-align: center;
 }
 
 header h1 {
-    margin: 0 0 15px 0;
-    font-size: 32px;
+    margin: 0 0 0.9rem 0;
+    font-size: 2rem;
 }
+
+
+/* ========================================
+   NAVEGACIÓN
+   ======================================== */
 
 nav ul {
     list-style: none;
@@ -36,7 +60,7 @@ nav ul {
 
 nav li {
     display: inline;
-    margin: 0 10px;
+    margin: 0.7rem;
 }
 
 nav a {
@@ -48,41 +72,102 @@ nav a:hover {
     text-decoration: underline;
 }
 
+
+/* ========================================
+   CONTENIDO PRINCIPAL
+   ======================================== */
+
 main {
     display: flex;
     flex-direction: column;
     align-items: center;
     text-align: center;
-    margin: 30px auto;
+    margin: 1.9rem auto;
 }
 
+
+/* ========================================
+   SECCIONES
+   ======================================== */
+
 section {
-    background-color: #1c1c1c;
+    background-color: #000000;
     border: 2px solid #eeeeee;
-    padding: 10px;
-    margin-bottom: 25px;
+    padding: 1.9rem;
+    margin-bottom: 1.6rem;
     width: 30%;
 }
 
 section h2 {
+    font-size: 1rem;
     margin-top: 0;
     border-bottom: 1px solid #eeeeee;
-    padding-bottom: 10px;
+    padding-bottom: 0.6rem;
 }
 
-article {
+
+/* ========================================
+   INFORMACIÓN
+   ======================================== */
+
+.informacion {
+    text-align: center;
+}
+
+/* ========================================
+   JUEGOS
+   ======================================== */
+
+.juegos {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    width: 70%;
+}
+
+.juegos h2 {
+    width: 100%;
+}
+
+.juego {
     border: 1px solid #888888;
-    padding: 15px;
-    margin-top: 15px;
+    padding: 0.9rem;
+    margin-top: 0.9rem;
+    width: 30%;
 }
 
-article h3 {
+.juego h3 {
     margin-top: 0;
+    font-size: 0.9rem;
 }
+
+.juego img {
+    width: 100%;
+    max-width: 12rem;
+}
+
+
+
+
+/* ========================================
+  FOOTER
+   ======================================== */
 
 footer {
     border-top: 2px solid #eeeeee;
-    padding: 20px;
+    padding: 1.25rem;
     text-align: center;
-    margin-top: 40px;
+    margin-top: 2.5rem;
 }
+
+footer a {
+    color: #eeeeee;
+}
+
+footer a:hover {
+    text-decoration: underline;
+}
+
