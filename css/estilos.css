@@ -86,3 +86,53 @@ footer {
     text-align: center;
     margin-top: 40px;
 }
+
+/* --- ESTILOS PARA LA PÁGININA "SOBRE NOSOTROS" --- */
+
+/* Hacemos la sección más ancha para que entren las dos tarjetas */
+.seccion-nosotros {
+    width: 80%;
+    max-width: 900px;
+}
+
+/* Flexbox para poner las tarjetas una al lado de la otra */
+.contenedor-perfiles {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap; /* Permite que bajen si la pantalla es chica (celulares) */
+    gap: 30px;
+    margin-top: 20px;
+}
+
+/* Estilos individuales de cada tarjeta */
+.tarjeta-perfil {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; /* Alinea el texto a la izquierda como en tu boceto */
+    text-align: left;
+    width: 45%; 
+    min-width: 250px;
+    border: none; /* Quitamos el borde general del article para que destaque la imagen */
+    padding: 0;
+}
+
+/* El recuadro para la foto */
+.imagen-placeholder {
+    width: 100%;
+    aspect-ratio: 1 / 1; /* Mantiene la caja perfectamente cuadrada */
+    border: 4px solid #888888; /* Borde grueso estilo retro */
+    background-color: #111111;
+    margin-bottom: 15px;
+}
+
+/* Ajustes para el texto dentro de la tarjeta */
+.tarjeta-perfil h3 {
+    margin: 0 0 10px 0;
+    font-size: 16px;
+    color: #eeeeee;
+}
+
+.tarjeta-perfil p {
+    margin: 0;
+    line-height: 1.5;
+}
