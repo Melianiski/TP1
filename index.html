@@ -1,20 +1,25 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Fuentes -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&family=Press+Start+2P&family=Roboto:ital,wght@0,100..900;1,100..900&family=Titillium+Web:ital,wght@0,200;0,300;0,400;0,600;0,700;0,900;1,200;1,300;1,400;1,600;1,700&family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&family=Press+Start+2P&family=Roboto:ital,wght@0,100..900;1,100..900&family=Titillium+Web:ital,wght@0,200;0,300;0,400;0,600;0,700;0,900;1,200;1,300;1,400;1,600;1,700;1,900&family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap" rel="stylesheet">
 
-    <title>TP1  </title>
+    <title>TP1</title>
 
     <link rel="stylesheet" href="css/estilos.css">
 </head>
 
 <body>
 
+    <!-- Título y navegación principal -->
     <header>
+
         <h1>TP1</h1>
 
         <nav>
@@ -24,60 +29,99 @@
                 <li><a href="dados.html">Dados</a></li>
                 <li><a href="preguntas.html">Preguntas</a></li>
                 <li><a href="puntajes.html">Puntajes</a></li>
-                <li><a href="nosotros.html">Nosotros</a></li>
             </ul>
         </nav>
+
     </header>
 
+
+    <!-- Contenido principal -->
     <main>
 
-    <section>
-        <h2>Bienvenidos</h2>
+        <!-- Información sobre el sitio -->
+        <section class="informacion">
 
-        <p>
-            Sitio de juegos
-        </p>
+            <h2>Bienvenidos</h2>
 
-    </section>
+            <p>
+                Bienvenidos a nuestro sitio de juegos.
+            </p>
 
-    <section>
-        <h2>Juegos</h2>
+            <p>
+                En este sitio podrán encontrar diferentes juegos
+                desarrollados para el Trabajo Práctico 1 de
+                Informática General.
+            </p>
 
-        <article>
-            <h3>Juego de cartas</h3>
-            <p>Próximamente...</p>
-        </article>
+        </section>
 
-        <article>
-            <h3>Juego de dados</h3>
-            <p>Próximamente...</p>
-        </article>
 
-        <article>
-            <h3>Juego de preguntas</h3>
-            <p>Próximamente...</p>
-        </article>
-    </section>
+        <!-- Sección de juegos -->
+        <section class="juegos">
 
-    <section>
-        <h2>Estado del trabajo practico</h2>
+            <h2>Juegos</h2>
 
-        <p>
-            🚧 EN CONSTRUCCIÓN 🚧
-        </p>
+            <!-- Juego de cartas -->
+            <article class="juego">
 
-        <p>
-            Última actualización: 8 de septiembre de 2026
-        </p>
-    </section>
+                <a href="cartas.html">
+                    <img src="img/gatito.gif" alt="Juego de cartas">
+                </a>
 
-</main>
+                <h3>Juego de cartas</h3>
 
+            </article>
+
+
+            <!-- Juego de dados -->
+            <article class="juego">
+
+                <a href="dados.html">
+                    <img src="img/gatito2.gif" alt="Juego de dados">
+                </a>
+
+                <h3>Juego de dados</h3>
+
+            </article>
+
+
+            <!-- Juego de preguntas -->
+            <article class="juego">
+
+                <a href="preguntas.html">
+                    <img src="img/gatito3.gif" alt="Juego de preguntas">
+                </a>
+
+                <h3>Juego de preguntas</h3>
+
+            </article>
+
+        </section>
+
+    </main>
+
+
+    <!-- Información del proyecto -->
     <footer>
-        <p>Informática General 2026 </p>
-        <p>Cátedra: Valeria Drelichman | Pedro Paleo | Leonardo Nadel | Norma Morales </p>
-        <p>Artes Multimediales | UNA </p>
+
+        <p>Informática General 2026</p>
+
+        <p>
+            Cátedra: Valeria Drelichman |
+            Pedro Paleo |
+            Leonardo Nadel |
+            Norma Morales
+        </p>
+
+        <p>Artes Multimediales | UNA</p>
+
+        <p>
+            <a href="nosotros.html">Nosotros</a>
+        </p>
+
     </footer>
 
 </body>
+
 </html>
+
