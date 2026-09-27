@@ -108,6 +108,7 @@ function actualizarInterfaz() {
     }
 }
 
+
 /* ========================================
    CALCULO DE PUNTAJE
    ======================================== */
@@ -142,9 +143,7 @@ function calcularPuntaje(mano) {
    FIN DE RONDA
    ======================================== */
 
-// OJO: esta función estaba antes definida DENTRO de turnoDelGato(),
-// por eso pedirCarta() no la podía ver y tiraba error al usarla.
-// Ahora vive a nivel superior, junto a las demás funciones del juego.
+
 function terminarRonda(mensaje) {
     terminado = true;
     turno = "terminado";
@@ -214,10 +213,7 @@ function plantarse() {
 function turnoDelGato() {
     const puntajeJugador = calcularPuntaje(manoJugador);
 
-    // Si el jugador ya se pasó de 21, ni hace falta que el gato juegue:
-    // el jugador pierde directo. Esto es un respaldo extra a la validación
-    // que ya hace pedirCarta(), por si alguna vez se llega acá con el
-    // jugador pasado de 21.
+ 
     if (puntajeJugador > 21) {
         terminarRonda("Te pasaste de 21. ¡Ganó el Gato Villano!");
         return;
@@ -251,3 +247,4 @@ btnRepartir.addEventListener("click", repartir);
 btnPedir.addEventListener("click", pedirCarta);
 btnPlantarse.addEventListener("click", plantarse);
 btnNuevaPartida.addEventListener("click", repartir);
+
