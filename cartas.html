@@ -1,17 +1,24 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&family=Press+Start+2P&family=Roboto:ital,wght@0,100..900;1,100..900&family=Titillium+Web:ital,wght@0,200;0,300;0,400;0,600;0,700;0,900;1,200;1,300;1,400;1,600;1,700;1,900&family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap" rel="stylesheet">
-    <title>TP1  </title>
+
+    <title>TP1 | Cartas</title>
 
     <link rel="stylesheet" href="css/estilos.css">
 </head>
 
 <body>
 
+        <!-- Título y navegación principal -->
     <header>
+
         <h1>TP1</h1>
 
         <nav>
@@ -24,17 +31,96 @@
                 <li><a href="nosotros.html">Nosotros</a></li>
             </ul>
         </nav>
+
     </header>
 
+
+    <!-- Contenido principal -->
     <main>
-        <h2>En construcción</h2>
-        <img src="img/construccion.gif" alt="Sitio en construcción">
+
+        <!-- Reglas del juego -->
+        <section class="informacion">
+
+            <h2>Blackjack</h2>
+
+            <p>
+                Acercate lo más posible a 21 sin pasarte.
+                Si te pasás, perdés la mano.
+            </p>
+
+            <p>
+                El Gato Villano roba carta mientras su
+                puntaje sea menor a 17.
+            </p>
+
+        </section>
+
+
+        <!-- Mesa de juego -->
+        <section class="mesa-blackjack">
+
+            <h2>Mesa de juego</h2>
+
+            <!-- Mano del gato -->
+            <article class="mano mano-gato">
+
+                <h3>Gato Villano <span id="puntaje-gato">?</span></h3>
+
+                <div id="cartas-gato" class="contenedor-cartas"></div>
+
+            </article>
+
+            <p id="mensaje-estado">
+                Presioná "Repartir" para empezar.
+            </p>
+
+            <!-- Mano del jugador -->
+            <article class="mano mano-jugador">
+
+                <h3>Tu mano <span id="puntaje-jugador">0</span></h3>
+
+                <div id="cartas-jugador" class="contenedor-cartas"></div>
+
+            </article>
+
+            <!-- Controles -->
+            <div class="controles-juego">
+                <button id="btn-repartir">Repartir</button>
+                <button id="btn-pedir" disabled>Pedir carta</button>
+                <button id="btn-plantarse" disabled>Plantarse</button>
+                <button id="btn-nueva-partida" hidden>Nueva partida</button>
+            </div>
+
+        </section>
 
     </main>
 
+
+    
+    <!-- Información del proyecto -->
     <footer>
+
         <p>Informática General 2026</p>
+
+        <p>
+            Cátedra: Valeria Drelichman |
+            Pedro Paleo |
+            Leonardo Nadel |
+            Norma Morales
+        </p>
+
+        <p>Artes Multimediales | UNA</p>
+
+        <p>
+            <a href="nosotros.html">
+            <img src="img/boton.gif" alt="Nosotros">
+            </a>
+        </p>
+
     </footer>
+
+
+    <script src="js/cartas.js"></script>
 
 </body>
 </html>
