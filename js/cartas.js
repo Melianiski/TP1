@@ -143,8 +143,7 @@ function calcularPuntaje(mano) {
    FIN DE RONDA
    ======================================== */
 
-
-function terminarRonda(mensaje) {
+function terminarRonda(mensaje, gano) {
     terminado = true;
     turno = "terminado";
 
@@ -153,6 +152,11 @@ function terminarRonda(mensaje) {
     btnPedir.disabled = true;
     btnPlantarse.disabled = true;
     btnNuevaPartida.hidden = false;
+
+    if (gano === true) {
+        const puntosActuales = Number(localStorage.getItem("puntosCartas")) || 0;
+        localStorage.setItem("puntosCartas", puntosActuales + 1);
+    }
 
     actualizarInterfaz();
 }
@@ -210,12 +214,14 @@ function plantarse() {
     turnoDelGato();
 }
 
+
+
 function turnoDelGato() {
     const puntajeJugador = calcularPuntaje(manoJugador);
 
  
     if (puntajeJugador > 21) {
-        terminarRonda("Te pasaste de 21. ¡Ganó el Gato Villano!");
+        terminarRonda("Te pasaste de 21. ¡Ganó el Gato Villano!", false);
         return;
     }
 
@@ -229,13 +235,13 @@ function turnoDelGato() {
     actualizarInterfaz();
 
     if (puntajeGato > 21) {
-        terminarRonda("El Gato se pasó de 21. ¡Ganaste!");
+        terminarRonda("El Gato se pasó de 21. ¡Ganaste!", true);
     } else if (puntajeGato > puntajeJugador) {
-        terminarRonda("El Gato Villano ganó esta mano.");
+        terminarRonda("El Gato Villano ganó esta mano.", false);
     } else if (puntajeGato < puntajeJugador) {
-        terminarRonda("¡Ganaste la mano!");
+        terminarRonda("¡Ganaste la mano!", true);
     } else {
-        terminarRonda("Empate.");
+        terminarRonda("Empate.", false);
     }
 }
 

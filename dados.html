@@ -1,10 +1,15 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&family=Press+Start+2P&family=Roboto:ital,wght@0,100..900;1,100..900&family=Titillium+Web:ital,wght@0,200;0,300;0,400;0,600;0,700;0,900;1,200;1,300;1,400;1,600;1,700;1,900&family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap" rel="stylesheet">
-    <title>TP1  </title>
+
+    <title>TP1 | Dados</title>
 
     <link rel="stylesheet" href="css/estilos.css">
 </head>
@@ -12,7 +17,8 @@
 <body>
 
     <header>
-        <h1>Dados</h1>
+
+        <h1>TP1</h1>
 
         <nav>
             <ul>
@@ -21,20 +27,96 @@
                 <li><a href="dados.html">Dados</a></li>
                 <li><a href="preguntas.html">Preguntas</a></li>
                 <li><a href="puntajes.html">Puntajes</a></li>
-                <li><a href="nosotros.html">Nosotros</a></li>
             </ul>
         </nav>
+
     </header>
 
+
     <main>
-        <h2>En construcción</h2>
-        <img src="img/construccion.gif" alt="Sitio en construcción">
+
+        <!-- Reglas del juego -->
+        <section class="informacion">
+
+            <h2>Par o Impar contra el Gato Villano</h2>
+
+            <p>
+                Se juegan 5 rondas alternadas. En las rondas donde tirás vos,
+                el Gato Villano intenta adivinar si el resultado es par o impar.
+                Si falla, ganás un punto.
+            </p>
+
+            <p>
+                En las rondas donde tira el Gato Villano, primero elegís
+                "Par" o "Impar" sin saber el resultado. Si acertás, ganás un punto.
+            </p>
+
+        </section>
+
+
+        <!-- Mesa de juego -->
+        <section class="mesa-dados">
+
+            <h2>Mesa de juego</h2>
+
+            <p id="info-ronda">Ronda 1 de 5</p>
+            <p id="puntos-partida">Aciertos: 0 / 5</p>
+
+            <p id="mensaje-estado-dados">
+                Presioná "Tirar dados" para comenzar.
+            </p>
+
+            <!-- Dados en pantalla -->
+            <div id="contenedor-dados" class="contenedor-dados">
+                <img id="dado-1" src="img/dados/dado_1.png" alt="Dado 1" class="dado">
+                <img id="dado-2" src="img/dados/dado_1.png" alt="Dado 2" class="dado">
+            </div>
+
+            <p id="marcador-oculto" hidden>🎲 ?&nbsp;&nbsp;&nbsp;🎲 ?</p>
+
+            <!-- Controles cuando tira el jugador -->
+            <div id="controles-jugador" class="controles-dados">
+                <button id="btn-tirar-jugador">Tirar dados</button>
+            </div>
+
+            <!-- Controles cuando tira el gato -->
+            <div id="controles-eleccion" class="controles-dados" hidden>
+                <p>El Gato Villano va a tirar. ¿Qué creés que va a salir?</p>
+                <button id="btn-elegir-par">Par</button>
+                <button id="btn-elegir-impar">Impar</button>
+            </div>
+
+            <button id="btn-nueva-partida-dados" hidden>Nueva partida</button>
+
+        </section>
 
     </main>
 
+
     <footer>
+
         <p>Informática General 2026</p>
+
+        <p>
+            Cátedra: Valeria Drelichman |
+            Pedro Paleo |
+            Leonardo Nadel |
+            Norma Morales
+        </p>
+
+        <p>Artes Multimediales | UNA</p>
+
+        <p>
+            <a href="nosotros.html">
+            <img src="img/boton.gif" alt="Nosotros">
+            </a>
+        </p>
+
     </footer>
+
+
+    <script src="js/almacenamiento.js"></script>
+    <script src="js/dados.js"></script>
 
 </body>
 </html>

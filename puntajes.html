@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&family=Press+Start+2P&family=Roboto:ital,wght@0,100..900;1,100..900&family=Titillium+Web:ital,wght@0,200;0,300;0,400;0,600;0,700;0,900;1,200;1,300;1,400;1,600;1,700;1,900&family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap" rel="stylesheet">
-    <title> TP1  </title>
+    <title> Puntajes </title>
 
     <link rel="stylesheet" href="css/estilos.css">
 </head>
@@ -12,7 +12,7 @@
 <body>
 
     <header>
-        <h1>TP1</h1>
+        <h1>Puntajes</h1>
 
         <nav>
             <ul>
@@ -21,20 +21,45 @@
                 <li><a href="dados.html">Dados</a></li>
                 <li><a href="preguntas.html">Preguntas</a></li>
                 <li><a href="puntajes.html">Puntajes</a></li>
-                <li><a href="nosotros.html">Nosotros</a></li>
             </ul>
         </nav>
     </header>
 
     <main>
-        <h2>En construcción</h2>
-        <img src="img/construccion.gif" alt="Sitio en construcción">
+        
+        <section>
+            <h2>Puntajes</h2>
+            <p>Jugador: <span id="nombre-mostrado"></span></p>
+            <p>Puntos en Cartas: <span id="puntos-cartas"></span></p>
+            <p>Puntos en Dados: <span id="puntos-dados"></span></p>
+            <p>Puntos en Preguntas: <span id="puntos-preguntas"></span></p>
+        </section>
 
     </main>
 
+        <!-- Información del proyecto -->
     <footer>
+
         <p>Informática General 2026</p>
+
+        <p>
+            Cátedra: Valeria Drelichman |
+            Pedro Paleo |
+            Leonardo Nadel |
+            Norma Morales
+        </p>
+
+        <p>Artes Multimediales | UNA</p>
+
+        <p>
+            <a href="nosotros.html">
+            <img src="img/boton.gif" alt="Nosotros">
+            </a>
+        </p>
+
     </footer>
 
-</body>
+    <script src="js/almacenamiento.js"></script>
+    <script src="js/puntajes.js"></script>
+    </body>
 </html>
