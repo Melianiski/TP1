@@ -1,17 +1,25 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Fuentes -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&family=Press+Start+2P&family=Roboto:ital,wght@0,100..900;1,100..900&family=Titillium+Web:ital,wght@0,200;0,300;0,400;0,600;0,700;0,900;1,200;1,300;1,400;1,600;1,700;1,900&family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap" rel="stylesheet">
-    <title>TP1  </title>
+
+    <title>TP1 - Preguntas</title>
 
     <link rel="stylesheet" href="css/estilos.css">
 </head>
 
 <body>
 
+    <!-- Título y navegación principal -->
     <header>
+
         <h1>TP1</h1>
 
         <nav>
@@ -23,15 +31,129 @@
                 <li><a href="puntajes.html">Puntajes</a></li>
             </ul>
         </nav>
+
     </header>
 
+
+    <!-- Contenido principal -->
     <main>
-        <h2>En construcción</h2>
-        <img src="img/construccion.gif" alt="Sitio en construcción">
+
+        <!-- Reglas del juego -->
+        <section class="informacion seccion-preguntas">
+
+            <h2>Trivia contra el Gato Villano</h2>
+
+            <p>
+                Respondé 10 preguntas de opción múltiple.
+                Cada pregunta tiene 20 segundos.
+            </p>
+
+            <p>
+                Cada acierto suma 100 puntos, más 5 puntos por cada
+                segundo que te sobre. Si te equivocás o se acaba el
+                tiempo, no sumás nada.
+            </p>
+
+            <p>
+                Las preguntas vienen de Open Trivia DB y están en inglés.
+            </p>
+
+        </section>
+
+
+        <!-- Zona de juego -->
+        <section class="trivia seccion-preguntas">
+
+            <!-- Pantalla 1: configuración -->
+            <div id="pantalla-inicio" class="pantalla">
+
+                <h2>Nueva partida</h2>
+
+                <form id="form-config" class="config">
+
+                    <label for="categoria">Categoría</label>
+                    <select id="categoria">
+                        <option value="9">Conocimiento general</option>
+                        <option value="27">Animales</option>
+                        <option value="17">Ciencia y naturaleza</option>
+                        <option value="22">Geografía</option>
+                        <option value="23">Historia</option>
+                        <option value="11">Cine</option>
+                        <option value="12">Música</option>
+                        <option value="15">Videojuegos</option>
+                    </select>
+
+                    <label for="dificultad">Dificultad</label>
+                    <select id="dificultad">
+                        <option value="easy">Fácil</option>
+                        <option value="medium" selected>Media</option>
+                        <option value="hard">Difícil</option>
+                    </select>
+
+                    <button type="submit" id="btn-jugar" class="boton">Jugar</button>
+
+                </form>
+
+                <p id="mensaje-estado" class="mensaje" role="status"></p>
+
+            </div>
+
+
+            <!-- Pantalla 2: partida en curso -->
+            <div id="pantalla-juego" class="pantalla" hidden>
+
+                <div class="estado">
+                    <span id="info-pregunta">Pregunta 1/10</span>
+                    <span id="info-puntaje">Puntaje: 0</span>
+                    <span id="info-tiempo">20</span>
+                </div>
+
+                <div class="barra">
+                    <div id="barra-tiempo" class="barra-relleno"></div>
+                </div>
+
+                <h3 id="texto-pregunta" class="pregunta"></h3>
+
+                <div id="opciones" class="opciones"></div>
+
+                <p id="feedback" class="mensaje" role="status"></p>
+
+                <button type="button" id="btn-siguiente" class="boton" hidden>Siguiente</button>
+
+            </div>
+
+
+            <!-- Pantalla 3: resultado final -->
+            <div id="pantalla-final" class="pantalla" hidden>
+
+                <h2>Fin del juego</h2>
+
+                <p id="resumen-final"></p>
+
+                <h3>Mejores puntajes</h3>
+
+                <table class="tabla-ranking">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Nombre</th>
+                            <th>Puntos</th>
+                            <th>Aciertos</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tabla-ranking"></tbody>
+                </table>
+
+                <button type="button" id="btn-reiniciar" class="boton">Jugar de nuevo</button>
+
+            </div>
+
+        </section>
 
     </main>
 
-        <!-- Información del proyecto -->
+
+    <!-- Información del proyecto -->
     <footer>
 
         <p>Informática General 2026</p>
@@ -53,5 +175,11 @@
 
     </footer>
 
+
+    <script src="js/almacenamiento.js"></script>
+    <script src="js/preguntas.js"></script>
+
+
 </body>
+
 </html>

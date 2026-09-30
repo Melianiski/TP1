@@ -224,3 +224,178 @@ footer a {
     margin: 0;
     line-height: 1.5;
 }
+
+/* ========================================
+   PÁGINA "PREGUNTAS"
+   ======================================== */
+
+[hidden] {
+    display: none !important;
+}
+
+/* Secciones más anchas que el 30% general */
+
+.seccion-preguntas {
+    width: 60%;
+    max-width: 700px;
+}
+
+
+/* Formulario de configuración */
+
+.config {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    text-align: left;
+}
+
+.config label {
+    font-size: 0.9rem;
+}
+
+.config input,
+.config select {
+    background-color: #13111c;
+    color: #eeeeee;
+    border: 2px solid #888888;
+    padding: 10px;
+    font-family: monospace;
+    font-size: 1rem;
+}
+
+.config input:focus,
+.config select:focus {
+    outline: none;
+    border-color: #eeeeee;
+}
+
+
+/* Botones generales del juego */
+
+.boton {
+    background-color: #13111c;
+    color: #eeeeee;
+    border: 2px solid #eeeeee;
+    padding: 12px 20px;
+    margin-top: 15px;
+    font-family: "Press Start 2P", system-ui;
+    font-size: 0.8rem;
+    cursor: pointer;
+}
+
+.boton:hover:not(:disabled) {
+    background-color: #eeeeee;
+    color: #13111c;
+}
+
+.boton:disabled {
+    opacity: 0.5;
+    cursor: wait;
+}
+
+
+/* Barra superior de la partida */
+
+.estado {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    font-size: 0.9rem;
+    margin-bottom: 10px;
+}
+
+.barra {
+    width: 100%;
+    height: 12px;
+    border: 2px solid #eeeeee;
+    background-color: #13111c;
+    margin-bottom: 20px;
+}
+
+.barra-relleno {
+    height: 100%;
+    width: 100%;
+    background-color: #eeeeee;
+    transition: width 1s linear;
+}
+
+
+/* Pregunta y opciones */
+
+.pregunta {
+    font-size: 0.9rem;
+    line-height: 1.6;
+    margin: 0 0 20px 0;
+}
+
+.opciones {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.opcion {
+    background-color: #13111c;
+    color: #eeeeee;
+    border: 2px solid #888888;
+    padding: 12px;
+    font-family: monospace;
+    font-size: 1rem;
+    text-align: left;
+    cursor: pointer;
+}
+
+.opcion:hover:not(:disabled) {
+    border-color: #eeeeee;
+    background-color: #2a2a2a;
+}
+
+.opcion:disabled {
+    cursor: default;
+}
+
+.opcion.correcta {
+    border-color: #55ff55;
+    color: #55ff55;
+}
+
+.opcion.incorrecta {
+    border-color: #ff5555;
+    color: #ff5555;
+}
+
+
+/* Mensajes */
+
+.mensaje {
+    min-height: 1.5em;
+    margin: 15px 0 0 0;
+}
+
+.mensaje.ok {
+    color: #55ff55;
+}
+
+.mensaje.error {
+    color: #ff5555;
+}
+
+
+/* Tabla de mejores puntajes */
+
+.tabla-ranking {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+.tabla-ranking th,
+.tabla-ranking td {
+    border: 1px solid #888888;
+    padding: 8px;
+}
+
+.tabla-ranking th {
+    background-color: #13111c;
+}
