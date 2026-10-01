@@ -6,8 +6,13 @@ const totalRondas = 5;
 let rondaActual = 1;
 let puntosPartida = 0;
 let turnoActual = "jugador";
-let eleccionUsuario = null;    // "par" o "impar", solo se usa cuando tira el gato
-let bloqueado = false;         // evita clicks mientras hay una animación en curso
+let eleccionUsuario = null;
+let bloqueado = false;
+
+// Guarda qué función hay que ejecutar cuando el usuario toque "Continuar".
+// Así el mismo botón sirve para todas las etapas, cambiando qué hace cada vez.
+let siguientePaso = null;
+
 
 /* ========================================
    CAPTURAS DOM
@@ -29,6 +34,8 @@ const btnElegirPar = document.getElementById("btn-elegir-par");
 const btnElegirImpar = document.getElementById("btn-elegir-impar");
 const btnNuevaPartidaDados = document.getElementById("btn-nueva-partida-dados");
 
+const btnContinuar = document.getElementById("btn-continuar");
+
 
 /* ========================================
    FUNCIONES DE DADOS
@@ -43,15 +50,13 @@ function mostrarDados(dado1Valor, dado2Valor) {
     dado2.src = "img/dados/dado_" + dado2Valor + ".png";
 }
 
-// Reemplaza la imagen por un dado "tapado" en vez de usar hidden,
-// porque el contenedor tiene display:flex por CSS y eso pisaba el hidden.
 function ocultarDados() {
     dado1.src = "img/dados/dado_oculto.png";
     dado2.src = "img/dados/dado_oculto.png";
 }
 
 // Cambia la imagen de los dados rápido varias veces para simular que ruedan.
-// Cuando termina, ejecuta la función que le pasamos (cuandoTermine).
+// Esto sigue siendo automático: es un efecto visual corto, no una pausa de lectura.
 function animarDados(cuandoTermine) {
     let vueltas = 0;
 
@@ -67,6 +72,19 @@ function animarDados(cuandoTermine) {
     }, 100);
 }
 
+// Muestra el botón "Continuar" con un texto puntual, y define qué función
+// se ejecuta la próxima vez que el usuario lo toque.
+function mostrarBotonContinuar(texto, funcionSiguiente) {
+    btnContinuar.textContent = texto;
+    btnContinuar.hidden = false;
+    siguientePaso = funcionSiguiente;
+}
+
+function ocultarBotonContinuar() {
+    btnContinuar.hidden = true;
+    siguientePaso = null;
+}
+
 
 /* ========================================
    TURNO DEL JUGADOR (tira el jugador, adivina el gato)
@@ -75,20 +93,21 @@ function animarDados(cuandoTermine) {
 function iniciarTurnoJugador() {
     turnoActual = "jugador";
     mensajeEstadoDados.textContent = "Presioná \"Tirar dados\" para tirar.";
-    mostrarDados(tirarDado(), tirarDado()); // caras random solo de adorno, mientras se espera
+    mostrarDados(tirarDado(), tirarDado());
 
     controlesJugador.hidden = false;
     controlesEleccion.hidden = true;
     btnTirarJugador.disabled = false;
+    ocultarBotonContinuar();
 }
 
 function tirarDadosJugador() {
     if (bloqueado) return;
 
     bloqueado = true;
-    btnTirarJugador.disabled = true;
+    controlesJugador.hidden = true; // se esconde el botón "Tirar dados" mientras dura la ronda
 
-    // El resultado real ya se calcula acá, aunque recién se muestra varios segundos después
+    // El resultado real ya se calcula acá, aunque recién se muestra cuando el usuario avanza
     const dado1Valor = tirarDado();
     const dado2Valor = tirarDado();
     const suma = dado1Valor + dado2Valor;
@@ -97,42 +116,49 @@ function tirarDadosJugador() {
     mensajeEstadoDados.textContent = "Tirando los dados...";
 
     animarDados(function () {
-        // Etapa 1: se ocultan los dados reales y el gato empieza a "pensar"
+        // Etapa 1: se ocultan los dados reales y el gato "piensa".
+        // Acá el usuario decide cuándo seguir, no hay timer.
         ocultarDados();
         gifGato.src = "img/gatodados.jpg";
         gifGato.hidden = false;
         mensajeEstadoDados.textContent = "El Gato Villano está pensando...";
 
-        setTimeout(function () {
-            // Etapa 2: el gato ya decidió y "dice" en voz alta su elección.
-            // 50% de probabilidad de que acierte; si acierta, dice lo mismo que salió.
-            const gatoAcierta = Math.random() < 0.5;
-            const dijoPar = gatoAcierta ? esPar : !esPar;
-
-            gifGato.src = dijoPar ? "img/gatopar.jpg" : "img/gatoimpar.jpg";
-            mensajeEstadoDados.textContent = "El Gato Villano dice: " + (dijoPar ? "Par" : "Impar") + "...";
-
-            setTimeout(function () {
-                // Etapa 3: recién ahora se revela el resultado real
-                gifGato.hidden = true;
-                mostrarDados(dado1Valor, dado2Valor);
-
-                let mensaje = "Sacaste " + dado1Valor + " y " + dado2Valor + " (" + (esPar ? "Par" : "Impar") + "). ";
-
-                if (gatoAcierta) {
-                    mensaje += "El Gato Villano adivinó. Perdiste esta ronda.";
-                } else {
-                    mensaje += "¡El Gato Villano falló! Ganaste esta ronda.";
-                    sumarPunto();
-                }
-
-                mensajeEstadoDados.textContent = mensaje;
-                bloqueado = false;
-                setTimeout(avanzarRonda, 8500); // tiempo para leer el resultado antes de pasar de ronda
-
-            }, 7500);
-        }, 7000);
+        mostrarBotonContinuar("Ver qué dice el Gato", function () {
+            mostrarDecisionGato(dado1Valor, dado2Valor, esPar);
+        });
     });
+}
+
+function mostrarDecisionGato(dado1Valor, dado2Valor, esPar) {
+    // 50% de probabilidad de que el gato acierte. Si acierta, "dice" lo mismo que salió.
+    const gatoAcierta = Math.random() < 0.5;
+    const dijoPar = gatoAcierta ? esPar : !esPar;
+
+    gifGato.src = dijoPar ? "img/gatopar.jpg" : "img/gatoimpar.jpg";
+    mensajeEstadoDados.textContent = "El Gato Villano dice: " + (dijoPar ? "Par" : "Impar") + "...";
+
+    mostrarBotonContinuar("Revelar resultado", function () {
+        revelarTurnoJugador(dado1Valor, dado2Valor, esPar, gatoAcierta);
+    });
+}
+
+function revelarTurnoJugador(dado1Valor, dado2Valor, esPar, gatoAcierta) {
+    gifGato.hidden = true;
+    mostrarDados(dado1Valor, dado2Valor);
+
+    let mensaje = "Sacaste " + dado1Valor + " y " + dado2Valor + " (" + (esPar ? "Par" : "Impar") + "). ";
+
+    if (gatoAcierta) {
+        mensaje += "El Gato Villano adivinó. Perdiste esta ronda.";
+    } else {
+        mensaje += "¡El Gato Villano falló! Ganaste esta ronda.";
+        sumarPunto();
+    }
+
+    mensajeEstadoDados.textContent = mensaje;
+    bloqueado = false;
+
+    mostrarBotonContinuar("Siguiente ronda", avanzarRonda);
 }
 
 
@@ -148,13 +174,14 @@ function iniciarTurnoGato() {
 
     controlesJugador.hidden = true;
     controlesEleccion.hidden = false;
+    ocultarBotonContinuar();
 }
 
 function elegirParImpar(eleccion) {
     if (bloqueado) return;
 
     bloqueado = true;
-    eleccionUsuario = eleccion; // guardamos la elección ANTES de tirar, para comparar después
+    eleccionUsuario = eleccion;
     controlesEleccion.hidden = true;
 
     const dado1Valor = tirarDado();
@@ -164,22 +191,32 @@ function elegirParImpar(eleccion) {
     mensajeEstadoDados.textContent = "El Gato Villano está tirando...";
 
     animarDados(function () {
-        mostrarDados(dado1Valor, dado2Valor);
+        // Mismo criterio que en el turno del jugador: el usuario decide cuándo ver el resultado
+        mensajeEstadoDados.textContent = "El Gato Villano ya tiró. ¿Listo para ver el resultado?";
 
-        const resultadoReal = suma % 2 === 0 ? "par" : "impar";
-        let mensaje = "El Gato Villano sacó " + dado1Valor + " y " + dado2Valor + " (" + (suma % 2 === 0 ? "Par" : "Impar") + "). ";
-
-        if (eleccionUsuario === resultadoReal) {
-            mensaje += "¡Acertaste! Ganaste esta ronda.";
-            sumarPunto();
-        } else {
-            mensaje += "Fallaste esta ronda.";
-        }
-
-        mensajeEstadoDados.textContent = mensaje;
-        bloqueado = false;
-        setTimeout(avanzarRonda, 7500);
+        mostrarBotonContinuar("Revelar resultado", function () {
+            revelarTurnoGato(dado1Valor, dado2Valor, suma);
+        });
     });
+}
+
+function revelarTurnoGato(dado1Valor, dado2Valor, suma) {
+    mostrarDados(dado1Valor, dado2Valor);
+
+    const resultadoReal = suma % 2 === 0 ? "par" : "impar";
+    let mensaje = "El Gato Villano sacó " + dado1Valor + " y " + dado2Valor + " (" + (suma % 2 === 0 ? "Par" : "Impar") + "). ";
+
+    if (eleccionUsuario === resultadoReal) {
+        mensaje += "¡Acertaste! Ganaste esta ronda.";
+        sumarPunto();
+    } else {
+        mensaje += "Fallaste esta ronda.";
+    }
+
+    mensajeEstadoDados.textContent = mensaje;
+    bloqueado = false;
+
+    mostrarBotonContinuar("Siguiente ronda", avanzarRonda);
 }
 
 
@@ -191,12 +228,12 @@ function sumarPunto() {
     puntosPartida++;
     puntosPartidaTexto.textContent = "Aciertos: " + puntosPartida + " / " + totalRondas;
 
-    // Mismo patrón que Cartas: sumamos al contador acumulado del navegador
     const puntosActuales = Number(localStorage.getItem("puntosDados")) || 0;
     localStorage.setItem("puntosDados", puntosActuales + 1);
 }
 
 function avanzarRonda() {
+    ocultarBotonContinuar();
     rondaActual++;
 
     if (rondaActual > totalRondas) {
@@ -206,7 +243,6 @@ function avanzarRonda() {
 
     infoRonda.textContent = "Ronda " + rondaActual + " de " + totalRondas;
 
-    // Rondas impares: tira el jugador. Rondas pares: tira el gato.
     if (rondaActual % 2 === 1) {
         iniciarTurnoJugador();
     } else {
@@ -233,7 +269,6 @@ function nuevaPartidaDados() {
     iniciarTurnoJugador();
 }
 
-
 /* ========================================
    EVENTOS
    ======================================== */
@@ -243,5 +278,11 @@ btnElegirPar.addEventListener("click", function () { elegirParImpar("par"); });
 btnElegirImpar.addEventListener("click", function () { elegirParImpar("impar"); });
 btnNuevaPartidaDados.addEventListener("click", nuevaPartidaDados);
 
-// Arranca la primera ronda apenas carga la página
+// El botón "Continuar" siempre ejecuta la función guardada en "siguientePaso"
+btnContinuar.addEventListener("click", function () {
+    if (siguientePaso !== null) {
+        siguientePaso();
+    }
+});
+
 iniciarTurnoJugador();
