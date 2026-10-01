@@ -114,8 +114,9 @@ function tirarDadosJugador() {
 
     animarDados(function () {
         ocultarDados();
-        gifGato.src = "img/gato_pensando.jpg";
-        gifGato.hidden = false;
+         gifGato.src = "img/miauley_piensa.gif";
+            gifGato.alt = "El Gato Villano pensando";
+            gifGato.hidden = false;
         mensajeEstadoDados.textContent = "El Gato Villano está pensando...";
 
         mostrarBotonContinuar("Ver qué dice el Gato", function () {
@@ -128,7 +129,7 @@ function mostrarDecisionGato(dado1Valor, dado2Valor, esPar) {
     const gatoAcierta = Math.random() < 0.5;
     const dijoPar = gatoAcierta ? esPar : !esPar;
 
-    gifGato.src = dijoPar ? "img/gatopar.jpg" : "img/gatoimpar.jpg";
+    gifGato.src = dijoPar ? "img/gatopar.gif" : "img/gatoimpar.gif";
     mensajeEstadoDados.textContent = "El Gato Villano dice: " + (dijoPar ? "Par" : "Impar") + "...";
 
     mostrarBotonContinuar("Revelar resultado", function () {

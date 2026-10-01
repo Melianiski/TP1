@@ -182,6 +182,50 @@ section h2 {
     box-shadow: 2px 2px 0px #007481;
 }
 
+/* ========================================
+   DIÁLOGO DEL GATO VILLANO (ESTILO RPG)
+   ======================================== */
+
+.dialogo-villano {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    background-color: #13111c; 
+    border: 4px solid #eeeeee; /* Borde grueso retro */
+    padding: 15px 25px;
+    margin: 10px auto 30px auto; /* Lo separa del título arriba y de los juegos abajo */
+    width: 90%; /* Ocupa casi todo el ancho de su contenedor */
+    gap: 20px;
+    box-shadow: 6px 6px 0px #13111c; 
+}
+
+.avatar-villano {
+    width: 300px;
+    height: 300px;
+    object-fit: cover;
+    image-rendering: pixelated; /* Mantiene los bordes duros del pixel art */
+    border: 4px solid #888888;
+    background-color: #13111c;
+    padding: 5px;
+}
+
+.texto-villano {
+    text-align: left;
+    font-family: monospace; /* Fuente retro para lectura */
+    font-size: 1rem;
+    line-height: 1.6;
+    color: #eeeeee;
+}
+
+.texto-villano p {
+    margin: 5px 0;
+}
+
+
+.texto-villano strong {
+    color: #ff5555; /* Un rojo/coral sutil para advertir que es el malo */
+    font-weight: normal;
+}
 
 /* ========================================
    DADOS
@@ -317,6 +361,17 @@ footer img:hover {
     text-align: justify;
     line-height: 1.6;
 }
+
+/* Links de las tarjetas de perfil */
+
+.tarjeta-perfil a {
+    color: #007481; 
+    text-decoration: none; 
+    font-weight: bold; 
+    transition: color 0.2s;
+
+}
+
 
 
 /* ========================================
