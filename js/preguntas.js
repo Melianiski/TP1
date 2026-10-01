@@ -4,14 +4,10 @@
 
 const totalPreguntas = 10;
 const segundosPorPregunta = 20;
-const puntosPorAcierto = 100;
-const puntosPorSegundo = 5;
-const maxRanking = 10;
 
 let listaPreguntas = [];
 let preguntaActual = 0;
 let puntos = 0;
-let aciertos = 0;
 let nombreJugador = "";
 let intervaloTimer = null;
 let tiempoRestante = segundosPorPregunta;
@@ -42,7 +38,6 @@ const feedback = document.getElementById("feedback");
 const btnSiguiente = document.getElementById("btn-siguiente");
 
 const resumenFinal = document.getElementById("resumen-final");
-const tablaRanking = document.getElementById("tabla-ranking");
 const btnReiniciar = document.getElementById("btn-reiniciar");
 
 
@@ -53,12 +48,12 @@ const btnReiniciar = document.getElementById("btn-reiniciar");
 // OpenTDB devuelve el texto con entidades HTML (&quot;, &#039;, etc.)
 // Este truco usa un elemento invisible para "traducirlas" a texto normal.
 function decodificarTexto(texto) {
-    const elementoAuxiliar = document.createElement("textarea");
-    elementoAuxiliar.innerHTML = texto;
-    return elementoAuxiliar.value;
+    const aux = document.createElement("textarea");
+    aux.innerHTML = texto;
+    return aux.value;
 }
 
-// Mezcla un array en el lugar
+// Mezcla un array en el lugar (mismo algoritmo que usamos para el mazo de Cartas)
 function mezclarArray(array) {
     for (let i = array.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
@@ -78,7 +73,7 @@ function empezarTrivia(evento) {
     // Evita que el formulario recargue la página
     evento.preventDefault();
 
-    nombreJugador = localStorage.getItem("nombre") || "Jugador";
+    nombreJugador = localStorage.getItem("nombreJugador") || "Jugador";
 
     const url = "https://opentdb.com/api.php?amount=" + totalPreguntas +
                 "&category=" + selectCategoria.value +
@@ -105,7 +100,6 @@ function empezarTrivia(evento) {
             listaPreguntas = datos.results;
             preguntaActual = 0;
             puntos = 0;
-            aciertos = 0;
 
             mensajeEstado.textContent = "";
             pantallaInicio.hidden = true;
@@ -194,11 +188,10 @@ function actualizarTimer() {
    PROCESAR RESPUESTA
    ======================================== */
 
-function responderPregunta(botonElegido, opcionElegida, respuestaCorrecta) {
-    // Si ya respondió, no hacemos nada
-    if (yaRespondio) {
-        return;
-    }
+function responderPregunta(botonElegido, opcionElegida, correcta) {
+    // Si ya respondió esta pregunta, no hacemos nada
+    if (yaRespondio) return;
+
     yaRespondio = true;
     clearInterval(intervaloTimer);
 
@@ -207,7 +200,7 @@ function responderPregunta(botonElegido, opcionElegida, respuestaCorrecta) {
     for (let i = 0; i < botones.length; i++) {
         botones[i].disabled = true;
 
-        if (botones[i].textContent === decodificarTexto(respuestaCorrecta)) {
+        if (botones[i].textContent === decodificarTexto(correcta)) {
             botones[i].classList.add("correcta");
         }
     }
@@ -215,12 +208,9 @@ function responderPregunta(botonElegido, opcionElegida, respuestaCorrecta) {
     if (opcionElegida === null) {
         feedback.textContent = "¡Se acabó el tiempo!";
         feedback.classList.add("error");
-    } else if (opcionElegida === respuestaCorrecta) {
-        // Puntos base + bonus por el tiempo que sobró
-        const puntosGanados = puntosPorAcierto + tiempoRestante * puntosPorSegundo;
-        puntos = puntos + puntosGanados;
-        aciertos++;
-        feedback.textContent = "¡Correcto! +" + puntosGanados + " puntos";
+    } else if (opcionElegida === correcta) {
+        puntos++;
+        feedback.textContent = "¡Correcto! +1 punto";
         feedback.classList.add("ok");
     } else {
         botonElegido.classList.add("incorrecta");
@@ -229,12 +219,7 @@ function responderPregunta(botonElegido, opcionElegida, respuestaCorrecta) {
     }
 
     infoPuntaje.textContent = "Puntaje: " + puntos;
-
-    if (preguntaActual === totalPreguntas - 1) {
-        btnSiguiente.textContent = "Ver resultado";
-    } else {
-        btnSiguiente.textContent = "Siguiente";
-    }
+    btnSiguiente.textContent = (preguntaActual === totalPreguntas - 1) ? "Ver resultado" : "Siguiente";
     btnSiguiente.hidden = false;
 }
 
@@ -251,68 +236,15 @@ function avanzarPregunta() {
 
 
 /* ========================================
-   RANKING (localStorage)
-   ======================================== */
-
-function obtenerRanking() {
-    const guardado = localStorage.getItem("puntajesPreguntas");
-
-    if (guardado === null) {
-        return [];
-    }
-    return JSON.parse(guardado);
-}
-
-function guardarPuntaje() {
-    const ranking = obtenerRanking();
-
-    ranking.push({
-        nombre: nombreJugador,
-        puntaje: puntos,
-        aciertos: aciertos
-    });
-
-    // Ordenamos de mayor a menor puntaje y nos quedamos con los mejores
-    ranking.sort(function (a, b) {
-        return b.puntaje - a.puntaje;
-    });
-    const mejores = ranking.slice(0, maxRanking);
-
-    localStorage.setItem("puntajesPreguntas", JSON.stringify(mejores));
-}
-
-function mostrarRanking() {
-    const ranking = obtenerRanking();
-    tablaRanking.innerHTML = "";
-
-    for (let i = 0; i < ranking.length; i++) {
-        const fila = document.createElement("tr");
-
-        // textContent (y no innerHTML) para que un nombre no pueda meter código HTML
-        const datos = [i + 1, ranking[i].nombre, ranking[i].puntaje, ranking[i].aciertos + "/" + totalPreguntas];
-
-        for (let j = 0; j < datos.length; j++) {
-            const celda = document.createElement("td");
-            celda.textContent = datos[j];
-            fila.appendChild(celda);
-        }
-
-        tablaRanking.appendChild(fila);
-    }
-}
-
-
-/* ========================================
    FIN DE LA TRIVIA
    ======================================== */
 
 function finalizarTrivia() {
-    guardarPuntaje();
+    resumenFinal.textContent = nombreJugador + ", acertaste " + puntos + " de " + totalPreguntas + " preguntas.";
 
-    resumenFinal.textContent = nombreJugador + ", hiciste " + puntos + " puntos con " +
-                               aciertos + " aciertos de " + totalPreguntas + ".";
-
-    mostrarRanking();
+    // Igual que dados y cartas
+    const puntosActuales = Number(localStorage.getItem("puntosPreguntas")) || 0;
+    localStorage.setItem("puntosPreguntas", puntosActuales + puntos);
 
     pantallaJuego.hidden = true;
     pantallaFinal.hidden = false;
