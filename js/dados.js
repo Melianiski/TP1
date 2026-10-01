@@ -25,7 +25,6 @@ const gifGato = document.getElementById("gif-gato-pensando");
 
 const dado1 = document.getElementById("dado-1");
 const dado2 = document.getElementById("dado-2");
-const contenedorDados = document.getElementById("contenedor-dados");
 
 const controlesJugador = document.getElementById("controles-jugador");
 const btnTirarJugador = document.getElementById("btn-tirar-jugador");
@@ -44,7 +43,6 @@ const btnContinuar = document.getElementById("btn-continuar");
 function tirarDado() {
     return Math.floor(Math.random() * 6) + 1;
 }
-
 function mostrarDados(dado1Valor, dado2Valor) {
     dado1.src = "img/dados/dado_" + dado1Valor + ".png";
     dado2.src = "img/dados/dado_" + dado2Valor + ".png";
@@ -105,9 +103,8 @@ function tirarDadosJugador() {
     if (bloqueado) return;
 
     bloqueado = true;
-    controlesJugador.hidden = true; // se esconde el botón "Tirar dados" mientras dura la ronda
+    controlesJugador.hidden = true;
 
-    // El resultado real ya se calcula acá, aunque recién se muestra cuando el usuario avanza
     const dado1Valor = tirarDado();
     const dado2Valor = tirarDado();
     const suma = dado1Valor + dado2Valor;
@@ -116,10 +113,8 @@ function tirarDadosJugador() {
     mensajeEstadoDados.textContent = "Tirando los dados...";
 
     animarDados(function () {
-        // Etapa 1: se ocultan los dados reales y el gato "piensa".
-        // Acá el usuario decide cuándo seguir, no hay timer.
         ocultarDados();
-        gifGato.src = "img/gatodados.jpg";
+        gifGato.src = "img/gato_pensando.jpg";
         gifGato.hidden = false;
         mensajeEstadoDados.textContent = "El Gato Villano está pensando...";
 
@@ -130,7 +125,6 @@ function tirarDadosJugador() {
 }
 
 function mostrarDecisionGato(dado1Valor, dado2Valor, esPar) {
-    // 50% de probabilidad de que el gato acierte. Si acierta, "dice" lo mismo que salió.
     const gatoAcierta = Math.random() < 0.5;
     const dijoPar = gatoAcierta ? esPar : !esPar;
 
@@ -191,7 +185,7 @@ function elegirParImpar(eleccion) {
     mensajeEstadoDados.textContent = "El Gato Villano está tirando...";
 
     animarDados(function () {
-        // Mismo criterio que en el turno del jugador: el usuario decide cuándo ver el resultado
+        ocultarDados();
         mensajeEstadoDados.textContent = "El Gato Villano ya tiró. ¿Listo para ver el resultado?";
 
         mostrarBotonContinuar("Revelar resultado", function () {
@@ -269,6 +263,7 @@ function nuevaPartidaDados() {
     iniciarTurnoJugador();
 }
 
+
 /* ========================================
    EVENTOS
    ======================================== */
@@ -278,7 +273,6 @@ btnElegirPar.addEventListener("click", function () { elegirParImpar("par"); });
 btnElegirImpar.addEventListener("click", function () { elegirParImpar("impar"); });
 btnNuevaPartidaDados.addEventListener("click", nuevaPartidaDados);
 
-// El botón "Continuar" siempre ejecuta la función guardada en "siguientePaso"
 btnContinuar.addEventListener("click", function () {
     if (siguientePaso !== null) {
         siguientePaso();
