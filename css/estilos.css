@@ -122,7 +122,7 @@ section h2 {
 }
 
 .juegos h2 {
-    width: 100%;
+    width: 70%;
 }
 
 
@@ -132,8 +132,8 @@ section h2 {
 
 .juego {
     border: 1px solid #888888;
-    padding: 15px;
-    margin-top: 15px;
+    padding: 1rem;
+    margin-top: 2rem;
     width: 30%;
 }
 
@@ -143,9 +143,30 @@ section h2 {
 }
 
 .juego img {
-    width: 100%;
-    max-width: 12rem;
+    width: 55%;
+    height: 150px;
+    object-fit: contain;
 }
+
+
+/* ========================================
+   DADOS
+   ======================================== */
+
+.dado {
+    width: 120px;
+    height: 120px;
+    image-rendering: pixelated;
+}
+
+.contenedor-dados {
+    display: flex;
+    gap: 1.5rem;
+    justify-content: center;
+    align-items: center;
+    margin: 1.5rem 0;
+}
+
 
 
 /* ========================================
