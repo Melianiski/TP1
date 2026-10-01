@@ -8,9 +8,14 @@
 
 body {
     margin: 0;
-    background-color: #111111;
+    background-color: #13111c; /* Azul oscuro estilo videojuego */
     color: #eeeeee;
     font-family: monospace;
+}
+
+/* Hace que el atributo hidden funcione siempre */
+[hidden] {
+    display: none !important;
 }
 
 
@@ -38,14 +43,14 @@ h6,
    ======================================== */
 
 header {
-    background-color: #1c1c1c;
-    border-bottom: 2px solid #eeeeee;
+    background-color: #13111c;
+    border-bottom: 4px solid #eeeeee; /* Borde grueso retro */
     padding: 20px;
     text-align: center;
 }
 
 header h1 {
-    margin: 0 0 15px 0;
+    margin: 0 0 25px 0;
     font-size: 32px;
 }
 
@@ -68,10 +73,15 @@ nav li {
 nav a {
     color: #eeeeee;
     text-decoration: none;
+    padding: 5px 10px;
+    transition: color 0.2s, background-color 0.2s;
 }
 
 nav a:hover {
-    text-decoration: underline;
+    background-color: #eeeeee;
+    color: #13111c;
+    text-decoration: none;
+    box-shadow: 2px 2px 0px #007481;
 }
 
 
@@ -93,16 +103,17 @@ main {
    ======================================== */
 
 section {
-    background-color: #1c1c1c;
-    border: 2px solid #eeeeee;
-    padding: 10px;
+    background-color: #13111c;
+    border: 4px solid #eeeeee;
+    padding: 20px;
     margin-bottom: 25px;
     width: 30%;
+    box-shadow: 6px 6px 0px #000000;
 }
 
 section h2 {
     margin-top: 0;
-    border-bottom: 1px solid #eeeeee;
+    border-bottom: 2px solid #eeeeee;
     padding-bottom: 10px;
 }
 
@@ -117,7 +128,7 @@ section h2 {
     flex-wrap: wrap;
     align-items: center;
     justify-content: center;
-    gap: 1rem;
+    gap: 1.5rem;
     width: 70%;
 }
 
@@ -131,10 +142,13 @@ section h2 {
    ======================================== */
 
 .juego {
-    border: 1px solid #888888;
+    border: 4px solid #888888;
+    background-color: #13111c;
     padding: 1rem;
     margin-top: 2rem;
     width: 30%;
+    transition: all 0.2s ease-in-out;
+    cursor: pointer;
 }
 
 .juego h3 {
@@ -146,6 +160,26 @@ section h2 {
     width: 55%;
     height: 150px;
     object-fit: contain;
+}
+
+/* Efectos hover de la tarjeta */
+
+.juego:hover {
+    transform: translateY(-8px);
+    background-color: #858c8d;
+    border-color: #eeeeee;
+    color: #eeeeee;
+    box-shadow: 6px 6px 0px #007481;
+}
+
+.juego:hover h3,
+.juego:hover a {
+    color: #eeeeee;
+}
+
+.juego:active {
+    transform: translateY(0);
+    box-shadow: 2px 2px 0px #007481;
 }
 
 
@@ -168,20 +202,36 @@ section h2 {
 }
 
 
-
 /* ========================================
    PIE DE PÁGINA
    ======================================== */
 
 footer {
-    border-top: 2px solid #eeeeee;
+    border-top: 4px solid #eeeeee;
     padding: 20px;
     text-align: center;
     margin-top: 40px;
 }
 
+footer p {
+    margin: 10px 0;
+}
+
 footer a {
     color: #eeeeee;
+}
+
+footer img {
+    margin-top: 10px;
+    border: 4px solid #eeeeee;
+    background-color: #1c1c1c;
+    padding: 5px;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+footer img:hover {
+    transform: translateY(-4px);
+    box-shadow: 4px 4px 0px #007481;
 }
 
 
@@ -219,6 +269,8 @@ footer a {
     min-width: 250px;
     border: none;
     padding: 0;
+    box-shadow: none;
+    background: none;
 }
 
 
@@ -228,8 +280,21 @@ footer a {
     width: 100%;
     aspect-ratio: 1 / 1;
     border: 4px solid #888888;
-    background-color: #111111;
+    background-color: #13111c;
     margin-bottom: 15px;
+    overflow: hidden; /* Corta el desborde de la imagen */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Obliga a la imagen a contenerse */
+
+.imagen-placeholder img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    image-rendering: pixelated;
 }
 
 
@@ -246,13 +311,46 @@ footer a {
     line-height: 1.5;
 }
 
+.seccion-desarrollo {
+    width: 60%;
+    max-width: 700px;
+    text-align: justify;
+    line-height: 1.6;
+}
+
+
+/* ========================================
+   BOTONES GENERALES (CARTAS, PREGUNTAS, ETC.)
+   ======================================== */
+
+button,
+.boton {
+    background-color: #13111c;
+    color: #eeeeee;
+    border: 2px solid #eeeeee;
+    padding: 12px 20px;
+    margin-top: 25px; /* Más espacio para despegar de las cartas */
+    font-family: monospace; /* Misma tipografía que el navbar */
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+button:hover:not(:disabled),
+.boton:hover:not(:disabled) {
+    background-color: #eeeeee;
+    color: #13111c;
+}
+
+button:disabled,
+.boton:disabled {
+    opacity: 0.5;
+    cursor: wait;
+}
+
+
 /* ========================================
    PÁGINA "PREGUNTAS"
    ======================================== */
-
-[hidden] {
-    display: none !important;
-}
 
 /* Secciones más anchas que el 30% general */
 
@@ -289,30 +387,6 @@ footer a {
 .config select:focus {
     outline: none;
     border-color: #eeeeee;
-}
-
-
-/* Botones generales del juego */
-
-.boton {
-    background-color: #13111c;
-    color: #eeeeee;
-    border: 2px solid #eeeeee;
-    padding: 12px 20px;
-    margin-top: 15px;
-    font-family: "Press Start 2P", system-ui;
-    font-size: 0.8rem;
-    cursor: pointer;
-}
-
-.boton:hover:not(:disabled) {
-    background-color: #eeeeee;
-    color: #13111c;
-}
-
-.boton:disabled {
-    opacity: 0.5;
-    cursor: wait;
 }
 
 
@@ -361,6 +435,7 @@ footer a {
     color: #eeeeee;
     border: 2px solid #888888;
     padding: 12px;
+    margin-top: 0; /* Anula el margin-top de los botones generales */
     font-family: monospace;
     font-size: 1rem;
     text-align: left;
@@ -374,6 +449,7 @@ footer a {
 
 .opcion:disabled {
     cursor: default;
+    opacity: 1; /* Anula la opacidad de los botones deshabilitados generales */
 }
 
 .opcion.correcta {
