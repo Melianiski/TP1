@@ -131,7 +131,7 @@ function mostrarDecisionGato(dado1Valor, dado2Valor, esPar) {
 
     gifGato.src = dijoPar ? "img/gatopar.gif" : "img/gatoimpar.gif";
     mensajeEstadoDados.textContent = "El Gato Villano dice: " + (dijoPar ? "Par" : "Impar") + "...";
-
+    
     mostrarBotonContinuar("Revelar resultado", function () {
         revelarTurnoJugador(dado1Valor, dado2Valor, esPar, gatoAcierta);
     });

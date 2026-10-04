@@ -239,6 +239,12 @@ section h2 {
     image-rendering: pixelated;
 }
 
+#mensaje-estado {
+    color: #ffffff;
+    font-size: 1.2rem;
+    font-family: "Press Start 2p", sans-serif;
+}
+
 
 /* ========================================
    DADOS
@@ -258,6 +264,11 @@ section h2 {
     margin: 1.5rem 0;
 }
 
+#mensaje-estado-dados {
+    color: #eeeeee;
+    font-size: 1.3rem;
+    font-family: "Press start 2p", sans-serif;
+}
 
 /* ========================================
    PIE DE PÁGINA
@@ -569,24 +580,22 @@ button:disabled,
    PUNTAJES 
    ======================================== */
 
-.seccion-puntajes {
-    width: 60%;
-    max-width: 700px;
+.tabla-puntajes {
+    width: 100%;
+    overflow-x: auto;
 }
 
-.contenido-puntajes {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 30px;
+.tabla-puntajes table {
+    width: 100%;
+    border-collapse: collapse;
 }
 
-.imagen-puntajes {
-    width: 128px;
-    height: auto;
-    border: none;
-    padding: 0;
-    background: none;
-    image-rendering: pixelated;
+.tabla-puntajes th, .tabla-puntajes td {
+    padding: 10px;
+    text-align: center;
+    border-bottom: 1px solid black;
+}
+
+.tabla-puntajes th {
+    font-weight: bold;
 }

@@ -5,7 +5,6 @@
 const palos = ["C", "D", "T", "P"];
 const valores = ["A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"];
 
-
 /* ========================================
    VARIABLES DEL ESTADO DEL JUEGO
    ======================================== */
@@ -15,7 +14,6 @@ let manoJugador = [];
 let manoGato = [];
 let turno = "jugador";      // puede valer "jugador", "gato" o "terminado"
 let terminado = false;
-
 
 /* ========================================
    CAPTURAS DOM
@@ -65,7 +63,6 @@ function mezclar(mazoAMezclar) {
     return mazoAMezclar;
 }
 
-
 /* ========================================
    RENDERIZADO
    ======================================== */
@@ -108,7 +105,6 @@ function actualizarInterfaz() {
     }
 }
 
-
 /* ========================================
    CALCULO DE PUNTAJE
    ======================================== */
@@ -138,7 +134,6 @@ function calcularPuntaje(mano) {
     return total;
 }
 
-
 /* ========================================
    FIN DE RONDA
    ======================================== */
@@ -160,7 +155,6 @@ function terminarRonda(mensaje, gano) {
 
     actualizarInterfaz();
 }
-
 
 /* ========================================
    LÓGICA DEL JUEGO
@@ -213,8 +207,6 @@ function plantarse() {
     turno = "gato";
     turnoDelGato();
 }
-
-
 
 function turnoDelGato() {
     const puntajeJugador = calcularPuntaje(manoJugador);
